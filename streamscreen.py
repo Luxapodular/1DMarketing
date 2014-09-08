@@ -23,7 +23,7 @@ class StreamScreen:
         self.bottomLeft = (self.bottomLeftX, self.bottomLeftY)
 
 #Get pixel from calibrated x,y point.         
-    def getPixel(self,x = self.width/2,y = self.height/2):
+    def getPixel(self, x, y):
         image = ImageGrab.grab()
         newX = x + self.topLeftX
         newY = y + self.topLeftY
