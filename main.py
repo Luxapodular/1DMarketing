@@ -1,32 +1,27 @@
 import time
 import screenconfig
 import blinkcontrol
-import datetime
-import pixelchooser
+from pixelchooser import PixelChooser
 from streamscreen import StreamScreen
 
 def main():
   #create screen object
   screen = StreamScreen(screenconfig.TOP_LEFT, screenconfig.BOTTOM_RIGHT)
 
-  #choose first pixel
-  currentTime = datetime.datetime.now().time()
-  pixel = pixelchooser.choosePixel((currentTime.minute % 10))
-  while True:
-    currentTime = datetime.datetime.now().time()
-    if (currentTime.second == 23):
-      pixel = pixelchooser.choosePixel(currentTime.minute)
+  #create pixel chooser object
+  pixelChooser = PixelChooser()
 
-    print currentTime
-    print pixel
+  while True:
+    #update pixel chooser
+    pixelChooser.update()
       
-    #read pixel
-    rgb = screen.getPixel(pixel[0],pixel[1])
+    #read pixel from screen
+    rgb = screen.getPixel(pixelChooser.pixel[0], pixelChooser.pixel[1])
 
     #send color to led
     blinkcontrol.setColor(rgb);
 
-    #sleep 200ms
+    #wait a little bit
     time.sleep(0.01)
 
 main()
