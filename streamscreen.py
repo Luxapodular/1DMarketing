@@ -1,8 +1,8 @@
 import ImageGrab
 
-#calibrate reference points for stream
 class StreamScreen:
     def __init__(self, topLeft, bottomRight):
+        # Calibrate reference points for stream
         self.topLeft = topLeft
         self.topLeftX = topLeft[0]
         self.topLeftY = topLeft[1]
@@ -21,13 +21,15 @@ class StreamScreen:
         self.bottomLeftX = self.topLeftX
         self.bottomLeftY = self.bottomRightY
         self.bottomLeft = (self.bottomLeftX, self.bottomLeftY)
-
-#Get pixel from calibrated x,y point.         
+         
     def getPixel(self, x, y):
-        image = ImageGrab.grab()
+        # Get pixel from calibrated x,y point.
         newX = x + self.topLeftX
         newY = y + self.topLeftY
+
+        image = ImageGrab.grab()
         rgb = image.getpixel((newX,newY))
+        
         return rgb
 
     
