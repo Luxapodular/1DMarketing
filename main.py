@@ -9,14 +9,15 @@ def main():
   screen = StreamScreen(screenconfig.TOP_LEFT, screenconfig.BOTTOM_RIGHT)
 
   #create pixel chooser object
-  pixelChooser = PixelChooser()
+  pixelChooser = PixelChooser(screen.width,screen.height)
 
   while True:
     #update pixel chooser
-    pixelChooser.update()
+    pixelChooser.update(screen.width,screen.height)
       
     #read pixel from screen
     rgb = screen.getPixel(pixelChooser.pixel[0], pixelChooser.pixel[1])
+    print pixelChooser.pixel[0], pixelChooser.pixel[1]
 
     #send color to led
     blinkcontrol.setColor(rgb);
